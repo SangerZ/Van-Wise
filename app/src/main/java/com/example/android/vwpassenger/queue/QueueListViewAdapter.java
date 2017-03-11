@@ -68,6 +68,7 @@ public class QueueListViewAdapter extends BaseAdapter {
                 @Override
                 public void onClick(View view) {
 //                    foundBeacon(t.getBeaconUUID(), t.getBeaconMajor(), t.getBeaconMinor());
+                    // teset
 
                 }
             });
