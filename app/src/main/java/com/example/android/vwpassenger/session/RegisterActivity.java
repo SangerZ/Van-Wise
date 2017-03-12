@@ -11,7 +11,6 @@ import android.widget.Toast;
 
 import com.example.android.vwpassenger.MainActivity;
 import com.example.android.vwpassenger.R;
-import com.example.android.vwpassenger.api.SignUpResponse;
 import com.example.android.vwpassenger.api.VanWiseAPIClient;
 import com.example.android.vwpassenger.api.VanWiseInterface;
 

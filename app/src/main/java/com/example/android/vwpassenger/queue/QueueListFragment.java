@@ -5,11 +5,8 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ListView;
 
 import com.example.android.vwpassenger.R;
-
-import java.util.ArrayList;
 
 
 /**
@@ -54,14 +51,14 @@ public class QueueListFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_trip_list, container, false);
-        ListView listView = (ListView) view.findViewById(R.id.queue_listview);
-        ArrayList<Trip> data = new ArrayList<>();
-
-        data.add(new Trip(0,R.drawable.ic_menu_camera,"somewhere",13,false,"",0,0));
-
-        QueueListViewAdapter adapter = new QueueListViewAdapter(getContext(),data);
-
-        listView.setAdapter(adapter);
+//        ListView listView = (ListView) view.findViewById(R.id.queue_listview);
+//        ArrayList<Queue> data = new ArrayList<>();
+//
+//        data.add(new Queue(0,R.drawable.ic_menu_camera,"somewhere",13,false,"",0,0));
+//
+//        QueueListViewAdapter adapter = new QueueListViewAdapter(getContext(),data);
+//
+//        listView.setAdapter(adapter);
 
         return view;
     }

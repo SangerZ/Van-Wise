@@ -1,8 +1,8 @@
 package com.example.android.vwpassenger.session;
 
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -10,7 +10,6 @@ import android.widget.EditText;
 
 import com.example.android.vwpassenger.MainActivity;
 import com.example.android.vwpassenger.R;
-import com.example.android.vwpassenger.api.LoginResponse;
 import com.example.android.vwpassenger.api.VanWiseAPIClient;
 import com.example.android.vwpassenger.api.VanWiseInterface;
 

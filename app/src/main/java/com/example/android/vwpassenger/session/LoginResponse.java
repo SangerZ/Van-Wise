@@ -1,30 +1,25 @@
-package com.example.android.vwpassenger.api;
+package com.example.android.vwpassenger.session;
 
 import com.google.gson.annotations.SerializedName;
 
 /**
  * Created by Pulitz on 3/3/2017.
  */
-public class RegisterResponse {
-    @SerializedName("RegisterResult")
-    private int result;
+
+public class LoginResponse {
+    @SerializedName("LoginStatus")
+    private int loginStatus;
     @SerializedName("Message")
     private String message;
     @SerializedName("UserID")
     private Integer userID;
 
-    public RegisterResponse(int result, String message, Integer userID) {
-        this.result = result;
-        this.message = message;
-        this.userID = userID;
+    public int getLoginStatus() {
+        return loginStatus;
     }
 
-    public int isResult() {
-        return result;
-    }
-
-    public void setResult(int result) {
-        this.result = result;
+    public void setLoginStatus(int loginStatus) {
+        this.loginStatus = loginStatus;
     }
 
     public String getMessage() {

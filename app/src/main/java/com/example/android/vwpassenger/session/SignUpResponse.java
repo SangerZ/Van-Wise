@@ -1,4 +1,4 @@
-package com.example.android.vwpassenger.api;
+package com.example.android.vwpassenger.session;
 
 import com.google.gson.annotations.SerializedName;
 

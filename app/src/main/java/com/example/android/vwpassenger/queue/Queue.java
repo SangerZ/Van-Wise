@@ -4,7 +4,7 @@ package com.example.android.vwpassenger.queue;
  * Created by Pulitz on 3/4/2017.
  */
 
-public class Trip {
+public class Queue {
     private int tripID;
     private int icon;
     private String destinationName;
@@ -14,7 +14,7 @@ public class Trip {
     private int beaconMajor;
     private int beaconMinor;
 
-    public Trip(int tripID, int icon, String destinationName, int numberInQueue, boolean selected, String beaconUUID, int beaconMajor, int beaconMinor) {
+    public Queue(int tripID, int icon, String destinationName, int numberInQueue, boolean selected, String beaconUUID, int beaconMajor, int beaconMinor) {
         this.tripID = tripID;
         this.icon = icon;
         this.destinationName = destinationName;
@@ -88,4 +88,5 @@ public class Trip {
     public void setBeaconMinor(int beaconMinor) {
         this.beaconMinor = beaconMinor;
     }
+
 }
