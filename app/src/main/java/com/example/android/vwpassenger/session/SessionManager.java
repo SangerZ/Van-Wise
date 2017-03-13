@@ -14,12 +14,16 @@ public class SessionManager {
     private static final String SESSION_ID = "SessionID";
     private static final String USER_ID = "UserID";
     private static final String NAME = "Name";
-
+    private static SessionManager sm = null;
+    Context _context;
     private SharedPreferences pref;
     private SharedPreferences.Editor editor;
-    Context _context;
 
-    private static SessionManager sm = null;
+    public SessionManager(Context context) {
+        this._context = context;
+        pref = _context.getSharedPreferences(PREF_NAME, Context.MODE_PRIVATE);
+        editor = pref.edit();
+    }
 
     public static SessionManager getInstance() {
         return sm;
@@ -28,12 +32,6 @@ public class SessionManager {
     public static SessionManager createInstance(Context context) {
         sm = new SessionManager(context);
         return sm;
-    }
-
-    public SessionManager(Context context) {
-        this._context = context;
-        pref = _context.getSharedPreferences(PREF_NAME,Context.MODE_PRIVATE);
-        editor = pref.edit();
     }
 
     public void createLoginSession(long sessionID, int userID, String name) {
@@ -87,5 +85,4 @@ public class SessionManager {
     public boolean isLoggedIn() {
         return pref.getBoolean(LOGGED_IN,false);
     }
-
 }

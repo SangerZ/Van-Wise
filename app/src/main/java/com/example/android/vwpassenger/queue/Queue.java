@@ -1,28 +1,30 @@
 package com.example.android.vwpassenger.queue;
 
+import com.google.gson.annotations.SerializedName;
+
 /**
  * Created by Pulitz on 3/4/2017.
  */
 
 public class Queue {
+    @SerializedName("TripID")
     private int tripID;
-    private int icon;
+    @SerializedName("OriginName")
+    private String originName;
+    @SerializedName("DestinationName")
     private String destinationName;
+    @SerializedName("NumberInQueue")
     private int numberInQueue;
-    private boolean selected;
-    private String beaconUUID;
-    private int beaconMajor;
-    private int beaconMinor;
+//    private String beaconUUID;
+//    private int beaconMajor;
+//    private int beaconMinor;
 
-    public Queue(int tripID, int icon, String destinationName, int numberInQueue, boolean selected, String beaconUUID, int beaconMajor, int beaconMinor) {
+
+    public Queue(int tripID, String originName, String destinationName, int numberInQueue) {
         this.tripID = tripID;
-        this.icon = icon;
+        this.originName = originName;
         this.destinationName = destinationName;
         this.numberInQueue = numberInQueue;
-        this.selected = selected;
-        this.beaconUUID = beaconUUID;
-        this.beaconMajor = beaconMajor;
-        this.beaconMinor = beaconMinor;
     }
 
     public int getTripID() {
@@ -33,12 +35,12 @@ public class Queue {
         this.tripID = tripID;
     }
 
-    public int getIcon() {
-        return icon;
+    public String getOriginName() {
+        return originName;
     }
 
-    public void setIcon(int icon) {
-        this.icon = icon;
+    public void setOriginName(String originName) {
+        this.originName = originName;
     }
 
     public String getDestinationName() {
@@ -56,37 +58,4 @@ public class Queue {
     public void setNumberInQueue(int numberInQueue) {
         this.numberInQueue = numberInQueue;
     }
-
-    public boolean isSelected() {
-        return selected;
-    }
-
-    public void setSelected(boolean selected) {
-        this.selected = selected;
-    }
-
-    public String getBeaconUUID() {
-        return beaconUUID;
-    }
-
-    public void setBeaconUUID(String beaconUUID) {
-        this.beaconUUID = beaconUUID;
-    }
-
-    public int getBeaconMajor() {
-        return beaconMajor;
-    }
-
-    public void setBeaconMajor(int beaconMajor) {
-        this.beaconMajor = beaconMajor;
-    }
-
-    public int getBeaconMinor() {
-        return beaconMinor;
-    }
-
-    public void setBeaconMinor(int beaconMinor) {
-        this.beaconMinor = beaconMinor;
-    }
-
 }

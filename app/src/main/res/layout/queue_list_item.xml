@@ -3,7 +3,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="#DDD"
+    android:background="?attr/selectableItemBackground"
+    android:clickable="true"
     android:gravity="center_vertical"
     android:orientation="horizontal"
     android:padding="16dp">
@@ -30,10 +31,11 @@
             android:textSize="16sp"
             android:textStyle="bold" />
         <TextView
+            android:id="@+id/origin_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="4dp"
-            android:text="(Placeholder)" />
+            android:text="Origin Name" />
     </LinearLayout>
 
     <LinearLayout

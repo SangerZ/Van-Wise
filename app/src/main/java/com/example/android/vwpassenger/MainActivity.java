@@ -3,6 +3,7 @@ package com.example.android.vwpassenger;
 import android.bluetooth.BluetoothAdapter;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.os.Bundle;
 import android.os.Handler;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.FragmentManager;
@@ -11,7 +12,6 @@ import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.Menu;
@@ -20,15 +20,14 @@ import android.view.MenuItem;
 import android.widget.ListView;
 import android.widget.Toast;
 
-import com.example.android.vwpassenger.queue.QueuePageFragment;
+import com.example.android.vwpassenger.queue.QueueFragment;
 import com.example.android.vwpassenger.session.SessionManager;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
+    private static final int REQUEST_ENABLE_BT = 87;
     private SessionManager sm;
     private FragmentManager fm;
-
-    private static final int REQUEST_ENABLE_BT = 87;
     private boolean btEnabled = false;
     private BluetoothAdapter mBluetoothAdapter;
     private boolean mScanning = false;
@@ -52,7 +51,7 @@ public class MainActivity extends AppCompatActivity
 
         fm = getSupportFragmentManager();
 
-        QueuePageFragment fragment = QueuePageFragment.newInstance();
+        QueueFragment fragment = QueueFragment.newInstance();
         FragmentTransaction fragmentTransaction = fm.beginTransaction();
         fragmentTransaction.replace(R.id.fragment_container,fragment,"Queue Page");
         fragmentTransaction.commit();
@@ -130,7 +129,7 @@ public class MainActivity extends AppCompatActivity
         int id = item.getItemId();
         switch (id) {
             case R.id.nav_queue: {
-                QueuePageFragment fragment = QueuePageFragment.newInstance();
+                QueueFragment fragment = QueueFragment.newInstance();
                 FragmentTransaction fragmentTransaction = fm.beginTransaction();
                 fragmentTransaction.replace(R.id.fragment_container,fragment,"Queue Page");
                 fragmentTransaction.commit();

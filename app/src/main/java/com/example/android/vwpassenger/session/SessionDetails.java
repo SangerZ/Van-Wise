@@ -7,12 +7,12 @@ package com.example.android.vwpassenger.session;
 public class SessionDetails {
     private long sessionID;
     private int userID;
-    private String name;
+    private String displayName;
 
-    public SessionDetails(long sessionID, int userID, String name) {
+    public SessionDetails(long sessionID, int userID, String displayName) {
         this.sessionID = sessionID;
         this.userID = userID;
-        this.name = name;
+        this.displayName = displayName;
     }
 
     public long getSessionID() {
@@ -23,7 +23,7 @@ public class SessionDetails {
         return userID;
     }
 
-    public String getName() {
-        return name;
+    public String getDisplayName() {
+        return displayName;
     }
 }

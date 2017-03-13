@@ -7,11 +7,13 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import com.example.android.vwpassenger.MainActivity;
 import com.example.android.vwpassenger.R;
-import com.example.android.vwpassenger.api.VanWiseAPIClient;
-import com.example.android.vwpassenger.api.VanWiseInterface;
+import com.example.android.vwpassenger.web_service.SessionResponse;
+import com.example.android.vwpassenger.web_service.VanWiseAPIClient;
+import com.example.android.vwpassenger.web_service.VanWiseInterface;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -20,7 +22,8 @@ import retrofit2.Response;
 public class LoginActivity extends AppCompatActivity {
 
     private static final String TAG = LoginActivity.class.getSimpleName();
-//    private static final int MIN_USERNAME_LENGTH = 6;
+    private static final int SUCCESS = 1;
+
     private EditText etUsername;
     private EditText etPassword;
 
@@ -43,26 +46,29 @@ public class LoginActivity extends AppCompatActivity {
                 String username = etUsername.getText().toString();
                 String password_hash = PasswordHasher.hashPassword(etPassword.getText().toString());
 
-                Call<LoginResponse> call = api.Login(username, password_hash);
-                call.enqueue(new Callback<LoginResponse>() {
+                Call<SessionResponse> call = api.Login(username, password_hash);
+                call.enqueue(new Callback<SessionResponse>() {
                     @Override
-                    public void onResponse(Call<LoginResponse> call, Response<LoginResponse> response) {
-                        LoginResponse res = response.body();
-                        Log.d(TAG, response.toString());
-                        if (res.getLoginStatus() == 1) {
-                            SessionManager.getInstance().createLoginSession(1L, res.getUserID(), "Test");
-
+                    public void onResponse(Call<SessionResponse> call, Response<SessionResponse> response) {
+                        SessionResponse res = response.body();
+                        if (res.getResultCode() == SUCCESS) {
+                            UserData ud = res.getUserData();
+                            SessionManager.getInstance().createLoginSession(1L, ud.getUserID(), ud.getDisplayName());
+                            Toast.makeText(getApplicationContext(), res.getMessage(), Toast.LENGTH_SHORT).show();
                             Intent i = new Intent(getApplicationContext(), MainActivity.class);
                             i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                             i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                             startActivity(i);
 
                             finish();
+                        } else {
+                            Toast.makeText(getApplicationContext(), res.getMessage(), Toast.LENGTH_SHORT).show();
                         }
                     }
 
                     @Override
-                    public void onFailure(Call<LoginResponse> call, Throwable t) {
+                    public void onFailure(Call<SessionResponse> call, Throwable t) {
+                        Toast.makeText(getApplicationContext(), t.getMessage(), Toast.LENGTH_SHORT).show();
                         Log.e(TAG, t.toString());
                     }
                 });

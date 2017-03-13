@@ -1,7 +1,6 @@
 package com.example.android.vwpassenger.queue;
 
 import android.content.Context;
-import android.content.SharedPreferences;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,8 +11,6 @@ import android.widget.TextView;
 
 import com.example.android.vwpassenger.R;
 
-import java.util.ArrayList;
-
 /**
  * Created by Pulitz on 3/4/2017.
  */
@@ -21,33 +18,23 @@ import java.util.ArrayList;
 public class QueueListViewAdapter extends BaseAdapter {
     private Context mContext;
     private LayoutInflater mInflater;
-    private ArrayList<Queue> mFavorites;
-    private ArrayList<Queue> mQueues;
-    private SharedPreferences.Editor editor;
+    private QueueDataSource dataSource;
 
 
-    public QueueListViewAdapter(Context context, ArrayList<Queue> favorite, ArrayList<Queue> queues) {
+    public QueueListViewAdapter(Context context, QueueDataSource dataSource) {
         mContext = context;
-        mFavorites = favorite;
-        mQueues = queues;
+        this.dataSource = dataSource;
         mInflater = (LayoutInflater) mContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        SharedPreferences sharedpref = mContext.getSharedPreferences("favorite_queues", Context.MODE_PRIVATE);
-        editor = sharedpref.edit();
     }
 
     @Override
     public int getCount() {
-        return mFavorites.size() + mQueues.size();
+        return dataSource.size();
     }
 
     @Override
     public Object getItem(int i) {
-        if (i < mFavorites.size()) {
-            return mFavorites.get(i);
-        } else {
-            i -= mFavorites.size();
-            return mQueues.get(i);
-        }
+        return dataSource.get(i);
     }
 
     @Override
@@ -64,76 +51,44 @@ public class QueueListViewAdapter extends BaseAdapter {
         final Queue t = (Queue) getItem(i);
 
         ImageView icon = (ImageView) view.findViewById(R.id.destination_icon);
-        icon.setImageResource(t.getIcon());
+        //TODO: Find Icons for each destination
+//        int resID = mContext.getResources().getIdentifier(t.getDestinationName(), "drawable", mContext.getPackageName());
+        icon.setImageResource(R.drawable.ic_menu_send);
 
-        TextView name = (TextView) view.findViewById(R.id.destination_name);
-        name.setText(t.getDestinationName());
+        TextView tvDestination = (TextView) view.findViewById(R.id.destination_name);
+        tvDestination.setText(t.getDestinationName());
+
+        TextView tvOrigin = (TextView) view.findViewById(R.id.origin_name);
+        tvOrigin.setText(t.getOriginName());
 
         TextView numberInQueue = (TextView) view.findViewById(R.id.number_in_queue);
-        numberInQueue.setText("99");
-
-//        ImageButton enterQueue = (ImageButton) view.findViewById(R.id.bt_enter_queue);
-//
-//        if (t.isSelected()) {
-//            enterQueue.setImageResource(R.drawable.ic_menu_send);
-//            enterQueue.setOnClickListener(new View.OnClickListener() {
-//                @Override
-//                public void onClick(View view) {
-////                    foundBeacon(t.getBeaconUUID(), t.getBeaconMajor(), t.getBeaconMinor());
-//                    // teset
-//
-//                }
-//            });
-//        } else {
-//            enterQueue.setImageResource(R.drawable.ic_enter_queue);
-//            enterQueue.setOnClickListener(new View.OnClickListener() {
-//                @Override
-//                public void onClick(View view) {
-////                    foundBeacon(t.getBeaconUUID(), t.getBeaconMajor(), t.getBeaconMinor());
-//
-//                }
-//            });
-//        }
+        numberInQueue.setText(Integer.toString(t.getNumberInQueue()));
 
         ImageButton favButton = (ImageButton) view.findViewById(R.id.bt_favorite);
 
-        if (i < mFavorites.size()) {
+        if (dataSource.isFavorite(i)) {
             favButton.setImageResource(R.drawable.ic_favorite);
             final int favIndex = i;
             favButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    Queue fav = mFavorites.remove(favIndex);
-                    editor.remove(Integer.toString(fav.getTripID()));
-                    editor.commit();
-                    mQueues.add(fav);
+                    dataSource.unfavorite(favIndex);
                     notifyDataSetChanged();
                 }
             });
 
         } else {
             favButton.setImageResource(R.drawable.ic_not_favorite);
-            final int queueIndex = i - mFavorites.size();
+            final int queueIndex = i;
             favButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    Queue fav = mQueues.remove(queueIndex);
-                    editor.putBoolean(Integer.toString(fav.getTripID()), true);
-                    editor.commit();
-                    mFavorites.add(fav);
+                    dataSource.favorite(queueIndex);
                     notifyDataSetChanged();
                 }
             });
         }
 
         return view;
-    }
-
-    public ArrayList<Queue> getmQueues() {
-        return mQueues;
-    }
-
-    public void setmQueues(ArrayList<Queue> items) {
-        this.mQueues = mQueues;
     }
 }
