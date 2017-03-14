@@ -1,4 +1,4 @@
-package com.example.android.vwpassenger;
+package com.example.android.vwpassenger.locate;
 
 
 import android.os.Bundle;
@@ -8,6 +8,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Spinner;
 
+import com.example.android.vwpassenger.R;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
@@ -28,6 +29,10 @@ public class LocateFragment extends Fragment implements OnMapReadyCallback {
         // Required empty public constructor
     }
 
+    public static LocateFragment newInstance() {
+        LocateFragment fragment = new LocateFragment();
+        return fragment;
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -40,11 +45,6 @@ public class LocateFragment extends Fragment implements OnMapReadyCallback {
         mapFragment.getMapAsync(this);
 
         return rootView;
-    }
-
-    public static LocateFragment newInstance() {
-        LocateFragment fragment = new LocateFragment();
-        return fragment;
     }
 
     @Override

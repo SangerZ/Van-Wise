@@ -11,12 +11,38 @@ import java.util.List;
 public class EnqueueResponse {
     @SerializedName("isSuccess")
     private boolean isSuccess;
+    @SerializedName("updatedQueue")
+    private List<Queue> queueUpdates;
+    @SerializedName("Message")
+    private String message;
 
-    @SerializedName("allQueue")
-    private List<QueueUpdate> queueUpdates;
+    public EnqueueResponse(boolean isSuccess, List<Queue> queueUpdates, String message) {
+        this.isSuccess = isSuccess;
+        this.queueUpdates = queueUpdates;
+        this.message = message;
+    }
 
-    @SerializedName("User_Trip")
-    private int inQueueID;
+    public boolean isSuccess() {
+        return isSuccess;
+    }
 
+    public void setSuccess(boolean success) {
+        isSuccess = success;
+    }
 
+    public List<Queue> getQueueUpdates() {
+        return queueUpdates;
+    }
+
+    public void setQueueUpdates(List<Queue> queueUpdates) {
+        this.queueUpdates = queueUpdates;
+    }
+
+    public String getMessage() {
+        return message;
+    }
+
+    public void setMessage(String message) {
+        this.message = message;
+    }
 }

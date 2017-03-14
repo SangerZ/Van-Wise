@@ -20,6 +20,7 @@ import android.view.MenuItem;
 import android.widget.ListView;
 import android.widget.Toast;
 
+import com.example.android.vwpassenger.locate.LocateFragment;
 import com.example.android.vwpassenger.queue.QueueFragment;
 import com.example.android.vwpassenger.session.SessionManager;
 

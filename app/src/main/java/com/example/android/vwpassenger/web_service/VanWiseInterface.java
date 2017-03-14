@@ -25,6 +25,9 @@ public interface VanWiseInterface {
 
 
     @GET("Enqueue")
-    Call<EnqueueResponse> Enqueue(@Query("user_id") int userID, @Query("trip_id") int tripID);
+    Call<EnqueueResponse> Enqueue(@Query("userID") int userID, @Query("tripID") int tripID);
+
+    @GET("Dequeue")
+    Call<EnqueueResponse> Dequeue(@Query("userID") int userID);
 
 }

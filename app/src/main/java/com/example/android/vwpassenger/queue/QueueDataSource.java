@@ -3,6 +3,7 @@ package com.example.android.vwpassenger.queue;
 import android.content.SharedPreferences;
 
 import java.util.ArrayList;
+import java.util.Collections;
 
 /**
  * Created by Pulitz on 3/13/2017.
@@ -60,10 +61,41 @@ public class QueueDataSource {
     }
 
     public void favorite(int i) {
-
+        Queue fav = get(i);
+        if (queues.remove(fav)) {
+            favorites.add(fav);
+            favoriteEditor.putBoolean(Integer.toString(fav.getTripID()), true);
+            favoriteEditor.commit();
+        }
+        sortQueues();
     }
 
     public void unfavorite(int i) {
+        Queue unFav = get(i);
+        if (favorites.remove(unFav)) {
+            queues.add(unFav);
+            favoriteEditor.remove(Integer.toString(unFav.getTripID()));
+            favoriteEditor.commit();
+        }
+        sortQueues();
+    }
 
+    private void sortQueues() {
+        Collections.sort(favorites);
+        Collections.sort(queues);
+    }
+
+    public int getUserTripID() {
+        return userTripID;
+    }
+
+    public void setUserTripID(int userTripID) {
+        this.userTripID = userTripID;
+    }
+
+    public void update(ArrayList<Queue> updates) {
+        this.favorites.clear();
+        this.queues = updates;
+        separateFavorites();
     }
 }

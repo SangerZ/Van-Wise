@@ -1,12 +1,14 @@
 package com.example.android.vwpassenger.queue;
 
+import android.support.annotation.NonNull;
+
 import com.google.gson.annotations.SerializedName;
 
 /**
  * Created by Pulitz on 3/4/2017.
  */
 
-public class Queue {
+public class Queue implements Comparable<Queue> {
     @SerializedName("TripID")
     private int tripID;
     @SerializedName("OriginName")
@@ -57,5 +59,10 @@ public class Queue {
 
     public void setNumberInQueue(int numberInQueue) {
         this.numberInQueue = numberInQueue;
+    }
+
+    @Override
+    public int compareTo(@NonNull Queue queue) {
+        return Integer.valueOf(tripID).compareTo(queue.tripID);
     }
 }
